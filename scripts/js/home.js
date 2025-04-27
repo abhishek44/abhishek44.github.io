@@ -400,7 +400,7 @@ define(['jquery',
                 if (!aboutVisible) {
                     aboutVisible = true;
                     document.getElementById("email-to").style.display = 'none';
-                    document.getElementById("nav-projects").style.display = 'none';
+                    // document.getElementById("nav-projects").style.display = 'none';
                     $('#nav-about').text("Close");
                     animAboutReveal =  anime.timeline({
                         loop: false,
@@ -463,133 +463,10 @@ define(['jquery',
                         duration: 500,
                         complete: function(){
                             document.getElementById("email-to").style.display = 'block';
-                            document.getElementById("nav-projects").style.display = 'block';
                         }
                     })
                 }
             }
-
-            var animStartupReveal = null;
-            function animateStartup() {
-                if(aboutVisible)
-                    animateAbout();
-                if (!projectsVisible) {
-                    projectsVisible = true;
-                    document.getElementById("email-to").style.display = 'none';
-                    document.getElementById("nav-about").style.display = 'none';
-                    $('#nav-projects').text("Close");
-                    animStartupReveal = anime.timeline({
-                        loop: false,
-                        complete: function() {}
-                    }).add({
-                        targets: '.slide-scrim-behavior',
-                        opacity: 0,
-                        elasticity: 0,
-                        offset: 0,
-                        easing: "easeOutExpo",
-                        duration: 700,
-                    }).add({
-                        targets: '#my-startup',
-                        // scaleX: [0, 1],
-                        scaleY: [0, 1],
-                        // borderRadius : '0px 0px 0px 0px',
-                        offset: 0,
-                        elasticity: 0,
-                        easing: "easeOutExpo",
-                        duration: 700,
-                    }).add({
-                        targets: '.startup-media .el-opacity',
-                        opacity: [0,1],
-                        translateY: ['1000px','0px'],
-                        elasticity: 0,
-                        easing: "easeOutExpo",
-                        duration: 500,
-                        offset: 500,
-                        delay: function(el, i, l) {
-                            return (i * 100);
-                        }
-                    }).add({
-                        targets: '.my-startup-desc .el-opacity',
-                        opacity: [0,1],
-                        translateY: ['20px','0px'],
-                        elasticity: 0,
-                        easing: "easeOutExpo",
-                        duration: 500,
-                        offset: 1000,
-                        delay: function(el, i, l) {
-                            return (i * 100);
-                        }
-                    }).add({
-                        targets: '#play-video',
-                        scaleX: [0,1],
-                        scaleY: [0,1],
-                        elasticity: 0,
-                        easing: "easeOutBack",
-                        duration: 500,
-                        offset: '+=1',
-                        complete: function(){
-                            document.getElementById("container-myinfo").style.opacity = 0;
-                        }
-                    });
-                } else {
-                    if(animStartupReveal != null)
-                        animStartupReveal.seek(animStartupReveal.duration);
-                    projectsVisible = false;
-                    $('#nav-projects').text("MY STARTUP");
-                    anime.timeline({
-                        loop: false,
-                        complete: function() {}
-                    }).add({
-                        targets: '#play-video',
-                        scaleX: [1,0],
-                        scaleY: [1,0],
-                        elasticity: 0,
-                        easing: "easeInSine",
-                        duration: 200,
-                        offset: 0,
-                    }).add({
-                        targets: '.my-startup-desc .el-opacity',
-                        opacity: [1,0],
-                        translateY: ['0px','40px'],
-                        elasticity: 0,
-                        easing: "easeInSine",
-                        duration: 300,
-                        offset: 300
-                    }).add({
-                        targets: '.startup-media .el-opacity',
-                        opacity: [1,0],
-                        translateY: ['0px','40px'],
-                        elasticity: 0,
-                        easing: "easeInSine",
-                        duration: 300,
-                        offset: 300
-                    }).add({
-                        targets: '#my-startup',
-                        // scaleX: [1, 0],
-                        scaleY: [1, 0],
-                        // borderRadius : '3000px 3000px 0px 0px',
-                        offset: '+=100',
-                        elasticity: 0,
-                        easing: "easeOutExpo",
-                        duration: 700,
-                        complete: function(){
-                            document.getElementById("email-to").style.display = 'block';
-                            document.getElementById("nav-about").style.display = 'block';
-                        }
-                    }).add({
-                        targets: '.slide-scrim-behavior',
-                        opacity: 1,
-                        offset: '+=100',
-                        elasticity: 0,
-                        easing: "easeOutExpo",
-                        duration: 700,
-                    });
-                }
-            }
-
-            $("#nav-projects").click(function() {
-                animateStartup();
-            });
 
             $("#nav-about").click(function() {
                 animateAbout();
